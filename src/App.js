@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+
+import Menu from './Components/Menu';
+import MapComponent from './Components/MapComponent';
+import AppContext from './Components/Helpers/Context';
+import React, { useEffect, useState, useRef } from 'react'
+import DummyMap from './Components/DummyMapComponent';
+
 
 function App() {
+
+  const [updatedLayers, setUpdatedLayers] = useState();
+
+  function addFeatureLayer() {
+
+  }
+
+  function removeFeatureLayer() {
+
+  }
+
+  let layersContext = {
+    addFeatureLayer: addFeatureLayer,
+    removeFeatureLayer: removeFeatureLayer,
+    updatedLayers: updatedLayers,
+    setUpdatedLayers: setUpdatedLayers
+
+  }
+  //    <MapComponent />
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppContext.Provider value={layersContext}>
+        <Menu />
+        <DummyMap />
+      </AppContext.Provider>
     </div>
   );
 }

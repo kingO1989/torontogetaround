@@ -4,7 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/public/assets/components
+/public/assets/esri
 # testing
 /coverage
 
