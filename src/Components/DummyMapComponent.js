@@ -1,8 +1,11 @@
 import Map from '@arcgis/core/Map'
 import MapView from '@arcgis/core/views/MapView';
 import TileLayer from '@arcgis/core/layers/TileLayer';
-import VectorTileLayer from '@arcgis/core/layers/VectorTileLayer'
-import FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import VectorTileLayer from '@arcgis/core/layers/VectorTileLayer';
+import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+import ElevationLayer from '@arcgis/core/layers/ElevationLayer';
+
+import Basemap from "@arcgis/core/Basemap.js";
 import React, { useEffect, useRef, useState, useContext } from 'react'
 import AppContext from "./Helpers/Context";
 import esriConfig from '@arcgis/core/config';
@@ -20,7 +23,16 @@ const DummyMap = () => {
 
 
         const map = new Map({
-            basemap: 'streets-navigation-vector'
+            //  basemap: 'streets-navigation-vector'
+            //non convenience string approach
+            basemap: new Basemap({
+                portalItem: {
+                    id: "084291b0ecad4588b8c8853898d72445" // enhanced contrast basemap
+                }
+            }),
+            //  baseLayers: [new TileLayer({ url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer/0" })]
+            //,
+            //referenceLayers: [new TileLayer({ url: "https://vectortileservices3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Santa_Monica_Mountains_Parcels_VTL/VectorTileServer/" })]
         })
 
         const view = new MapView({
@@ -29,18 +41,18 @@ const DummyMap = () => {
             center: [-118.805, 34.027],
             zoom: 13
         })
-
-        const vtlLayer = new VectorTileLayer({
-            url: "https://vectortileservices3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Santa_Monica_Mountains_Parcels_VTL/VectorTileServer/"
-        });
-
-        const setFeatureLayer = new FeatureLayer({
-            url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer/0",
-
-        });
-
-        map.add(setFeatureLayer);
-        map.add(vtlLayer);
+        /* 
+                const vtlLayer = new VectorTileLayer({
+                    url: "https://vectortileservices3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Santa_Monica_Mountains_Parcels_VTL/VectorTileServer/"
+                });
+        
+                const setFeatureLayer = new FeatureLayer({
+                    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer/0",
+        
+                });
+         */
+        // map.add(setFeatureLayer);
+        // map.add(vtlLayer);
 
 
 
