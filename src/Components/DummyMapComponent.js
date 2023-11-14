@@ -20,19 +20,27 @@ const DummyMap = () => {
 
     useEffect(() => {
 
+        // Create a VectorTileLayer from a style URL
+        const mapBaseLayer = new VectorTileLayer({
+            url: "https://basemaps.arcgis.com/arcgis/rest/services/OpenStreetMap_v2/VectorTileServer"
+        });
+
+        const mapBaseLayer2 = new VectorTileLayer({
+            url: "https://basemaps.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer"
+        });
 
 
+        // Create a Basemap with the VectorTileLayer
+        const customBasemap = new Basemap({
+            baseLayers: [mapBaseLayer, mapBaseLayer2],
+            title: "Terrain"
+        });
+        //Then add the custom base map to basemap property of Map
         const map = new Map({
-            //  basemap: 'streets-navigation-vector'
-            //non convenience string approach
-            basemap: new Basemap({
-                portalItem: {
-                    id: "084291b0ecad4588b8c8853898d72445" // enhanced contrast basemap
-                }
-            }),
-            //  baseLayers: [new TileLayer({ url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer/0" })]
-            //,
-            //referenceLayers: [new TileLayer({ url: "https://vectortileservices3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Santa_Monica_Mountains_Parcels_VTL/VectorTileServer/" })]
+
+            basemap: {
+                baseLayers: [mapBaseLayer2]
+            }
         })
 
         const view = new MapView({
@@ -41,20 +49,6 @@ const DummyMap = () => {
             center: [-118.805, 34.027],
             zoom: 13
         })
-        /* 
-                const vtlLayer = new VectorTileLayer({
-                    url: "https://vectortileservices3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Santa_Monica_Mountains_Parcels_VTL/VectorTileServer/"
-                });
-        
-                const setFeatureLayer = new FeatureLayer({
-                    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer/0",
-        
-                });
-         */
-        // map.add(setFeatureLayer);
-        // map.add(vtlLayer);
-
-
 
 
         return () => {
