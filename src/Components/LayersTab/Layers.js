@@ -1,7 +1,9 @@
+import Lists from "../Lists"
+
 const LayersTab = () => {
 
     return (<>
-        <p>LayersTab tab clicked</p>
+        <Lists />
     </>)
 }
 export default LayersTab

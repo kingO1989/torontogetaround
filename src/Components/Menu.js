@@ -39,7 +39,7 @@ const Menu = () => {
 
             </div>
 
-            <Lists />
+
 
 
 
